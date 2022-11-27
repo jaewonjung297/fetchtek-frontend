@@ -6,6 +6,9 @@ import styled from "styled-components";
 import { animated, useSpring } from 'react-spring';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { Store } from "../Store";
+import { useContext } from "react";
 
 const Styles = styled.div`
     width: 12rem;
@@ -48,6 +51,23 @@ const Styles = styled.div`
 
 function Product(props) {
     const {product} = props;
+    const {state, dispatch: cxtDispatch} = useContext(Store);
+    const {
+        cart: { cartItems },
+    } = state;
+    const updateCartHandler = async (item) => {
+        const existItem = cartItems.find((x) => x._id === product._id)
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        const { data } = await axios.get(`/api/products/${item._id}`)
+        if (data.countInStock < quantity) {
+            window.alert("Sorry, item is out of stock!");
+            return;
+          }
+          cxtDispatch({
+            type: 'CART_ADD_ITEM', 
+            payload: {...item, quantity},
+          });
+    }
 
     const [hovered, setHovered] = useState(false);
     const navigate = useNavigate();
@@ -87,7 +107,8 @@ function Product(props) {
                     <Card.Title>{product.name}</Card.Title>
                     <Rating rating = {product.rating} numReviews = {product.numReviews} />
                     <Card.Text>${product.price}</Card.Text>
-                    <Button>Add to Cart</Button>
+                    {product.countInStock === 0 ? (<Button variant = "light" disabled>Out of Stock</Button>)
+                    : (<Button onClick = {() => updateCartHandler(product)}>Add to Cart</Button>)}
                 </Card.Body>
             </div>
         </div>
