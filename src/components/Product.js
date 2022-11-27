@@ -10,11 +10,13 @@ import { useNavigate } from 'react-router-dom';
 const Styles = styled.div`
     width: 12rem;
     border-radius: 10px;
+    border-style: solid;
+    border-color: black
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: .5rem .5rem .5rem .5rem;
+    margin: 1rem 1rem 1rem 1rem;
     padding: 0.5rem 0 0.5rem 0;
     box-shadow: 2px 4px 2px rgba(232, 234, 237, 0.3);
     text-align: center;
@@ -22,18 +24,17 @@ const Styles = styled.div`
     :hover {
         cursor: pointer;
     }
-    p {
-        margin-bottom: 0;
-    }
     .label {
         font-size: 1rem;
     }
     .model {
         font-size: 1.1rem;
     }
-    .phoneImage {
-        width: 30%;
-        margin-bottom: 0.7em;
+    .phone-image {
+        height: 13em;
+        width: auto;
+        object-fit: scale-down;
+        margin-bottom: 0.5em;
     }
 
     @media only screen and (max-width: 650px) {
@@ -42,10 +43,7 @@ const Styles = styled.div`
     @media only screen and (max-width: 400px) {
         width: 8rem;
     }
-    img {
-      width: 10em;
-      height: 20em;
-  }
+ 
 `;
 
 function Product(props) {
@@ -78,21 +76,21 @@ function Product(props) {
 
     return (
       <Styles as={animated.div} style={springStyle} onMouseEnter={triggerIn} onMouseLeave={triggerOut}>
-        <Card key = {product.slug}>
-        <div key = {product.slug}>
-        <Link to = {`/product/${product.slug}`}>
-          <img src = {product.image} alt = {product.name} />
-        </Link>
-        <Card.Body>
-            <Link to = {`/product/${product.slug}`}>
-            </Link> 
-            <Card.Title>{product.name}</Card.Title>
-            <Rating rating = {product.rating} numReviews = {product.numReviews} />
-            <Card.Text>${product.price}</Card.Text>
-            <Button>Add to Cart</Button>
-        </Card.Body>
-      </div>
-      </Card>
+        <div className = "card-container" key = {product.slug}>
+            <div key = {product.slug}>
+                <Link to = {`/product/${product.slug}`}>
+                    <img className = "phone-image" src = {product.image} alt = {product.name} />
+                </Link>
+                <Card.Body>
+                    <Link to = {`/product/${product.slug}`}>
+                    </Link> 
+                    <Card.Title>{product.name}</Card.Title>
+                    <Rating rating = {product.rating} numReviews = {product.numReviews} />
+                    <Card.Text>${product.price}</Card.Text>
+                    <Button>Add to Cart</Button>
+                </Card.Body>
+            </div>
+        </div>
       </Styles>
     )
 };

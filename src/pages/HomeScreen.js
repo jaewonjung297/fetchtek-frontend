@@ -8,6 +8,9 @@ import Col from 'react-bootstrap/Col';
 import Product from "../components/Product";
 import AOS from 'aos';
 import styled from 'styled-components'
+import Card from 'react-bootstrap/Card';
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox"
 
 const Styles = styled.div`
     margin-top: 9rem;
@@ -43,6 +46,7 @@ const Styles = styled.div`
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    
     @media only screen and (max-width: 650px) {
         #top-text {
             font-size: 3rem;
@@ -92,11 +96,17 @@ function HomePage() {
     return (
 		<Styles>
 			<h1>Featured Products</h1>
-			<div data-aos="fade-left" data-aos-delay={200} className = "products">
-				{products.map(product => (
-					<Product product = {product}></Product>
-				))}
-			</div>
+            {loading ? (
+                <LoadingBox />
+            ) : error ? (
+                <MessageBox varaint = "danger">{error}</MessageBox>
+            ) : (
+                <div data-aos="fade-left" data-aos-delay={200} className = "products">
+                {products.map(product => (
+                    <Product product = {product}></Product>
+                    ))}
+                </div>
+            )}
 		</Styles>
     );
 }
