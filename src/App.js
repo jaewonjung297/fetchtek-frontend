@@ -10,6 +10,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Store } from './Store';
 import CartPage from './pages/CartPage';
 import AboutPage from './pages/AboutPage';
+import SignInPage from './pages/SignInPage';
 
 function App() {
   const {state} = useContext(Store);
@@ -37,7 +38,11 @@ function App() {
                 <Link to ="/about" className = "nav-link">
                   About Us
                 </Link>
-
+              </Nav>
+              <Nav className = "me-auto">
+                <Link to ="/signin" className = "nav-link">
+                  Sign In
+                </Link>
               </Nav>
             </Container>
           </Navbar>
@@ -49,6 +54,7 @@ function App() {
               <Route path="/" element={<HomeScreen />} />
               <Route path = "/cart" element = {<CartPage />} />
               <Route path = "/about" element = {<AboutPage />} />
+              <Route path = "/signin" element = {<SignInPage />} />
             </Routes>
           </Container>
         </main>
