@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Store } from "../Store";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const Styles = styled.div`
     width: 12rem;
@@ -63,6 +64,7 @@ function Product(props) {
             window.alert("Sorry, item is out of stock!");
             return;
           }
+          toast.success('Added to cart!')
           cxtDispatch({
             type: 'CART_ADD_ITEM', 
             payload: {...item, quantity},
@@ -105,10 +107,9 @@ function Product(props) {
                     <Link to = {`/product/${product.slug}`}>
                     </Link> 
                     <Card.Title>{product.name}</Card.Title>
-                    <Rating rating = {product.rating} numReviews = {product.numReviews} />
-                    <Card.Text>${product.price}</Card.Text>
+                    <Card.Text style = {{marginTop: "2px", fontSize: "12px"}}>${product.price}</Card.Text>
                     {product.countInStock === 0 ? (<Button variant = "light" disabled>Out of Stock</Button>)
-                    : (<Button onClick = {() => updateCartHandler(product)}>Add to Cart</Button>)}
+                    : (<Button className = "border border-white btn shadow-none" onClick = {() => updateCartHandler(product)}>Add to Cart</Button>)}
                 </Card.Body>
             </div>
         </div>

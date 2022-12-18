@@ -1,45 +1,19 @@
 import { useEffect, useReducer, useState } from "react";
 //import data from "../data";
 import axios from 'axios';
-import logger from 'use-reducer-logger';
 import Product from "../components/Product";
 import styled from 'styled-components'
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox"
-
+import background from '../images/new.jpg';
 const Styles = styled.div`
-    margin-top: 9rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    #top-text-container {
-        height: 25vh;
-        width: 80vw;
-        background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(28,184,215,1) 98%);
-        z-index: -1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        padding-bottom: 1rem;
-        border-radius: 25px;
-        margin-bottom: 2rem;
-    }
     #text-alignment {
         display: flex;
         flex-direction: column;
         height: 65%;
-    }
-    #top-subtext {
-       color: white;
-       margin-bottom: 0;
-    }
-    #top-text {
-        background: rgba(28,184,215,1);
-        font-size: 4rem;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
     }
     
     @media only screen and (max-width: 650px) {
@@ -51,6 +25,18 @@ const Styles = styled.div`
         #top-text {
             font-size: 2.5rem;
         }
+    }
+    img {
+        width: 120%;
+    }
+    .background {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position:relative
+    }
+    h1 span {
+        color: cyan;
     }
 `;
 
@@ -68,7 +54,7 @@ const reducer = (state, action) => {
 };
 
 function HomePage() {
-	const [{loading, error, products}, dispatch] = useReducer(logger(reducer), {
+	const [{loading, error, products}, dispatch] = useReducer(reducer, {
 		products: [],
 		loading: true,
 		error: '',
@@ -90,14 +76,18 @@ function HomePage() {
 	}, [])
     return (
 		<Styles>
-			<h1>Featured Products</h1>
+            <Styles>
+                <img src = {background} className = "background"/>
+                <h1 style = {{position: "absolute", top: "65%", color: "white", fontSize: "65px"}}>Buy and <span>Sell</span> Your Electronics</h1>
+            </Styles>
+			<h2>Featured Products</h2>
             {loading ? (
                 <LoadingBox />
             ) : error ? (
                 <MessageBox varaint = "danger">{error}</MessageBox>
             ) : (
                 <div data-aos="fade-left" data-aos-delay={200} className = "products">
-                {products.map(product => (
+                {products.slice(0, 4).map(product => (
                     <Product product = {product}></Product>
                     ))}
                 </div>

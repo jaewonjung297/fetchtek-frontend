@@ -14,12 +14,6 @@ const Styles = styled.div`
     *, *:before, *:after {
         box-sizing: inherit;
     }
-    div {
-        display: block;
-    }
-    main {
-        display: block;
-    }
     .site section:first-of-type {
         margin-top: 0.5rem;
     }
@@ -28,9 +22,6 @@ const Styles = styled.div`
         margin-right: 0px;
         margin-bottom: 4rem;
         margin-left: 0px;
-    }
-    section {
-        display: block;
     }
     @media (max-width: 35rem)
     .ourMission:not(.rounded) .ourMissionWrap {
@@ -43,37 +34,28 @@ const Styles = styled.div`
     @media (max-width: 64rem)
     .ourMissionWrap {
         padding: 3rem 2rem 5.625rem;
-        display: block;
 }
     @media (max-width: 90rem)
     .container {
         width: 100%;
         padding: 0 4.5rem;
+        display: flex;
     }
     .container {
         margin: 0 auto;
-        
     }
     .missionWrap {
         border-radius: 1rem;
         padding: 6rem 6.875rem;
-        display: grid;
-        grid-template-columns: 51.1152416% 48.8847584%;
         background: linear-gradient(90deg, #016eff, #4092FF, #016eff);
+        display: flex;
+        flex-direction: row;
     }
-    .missionContent {
-        max-width: 26rem;
-        margin-right: 1.5rem;
-    }
+
     .missionTitle {
-        ont-size: 2.5rem;
+        font-size: 2.5rem;
         line-height: 108%;
         letter-spacing: -.02em;
-    }
-    .missionBlock {
-        display: grid;
-        grid-template-columns: 100%;
-        grid-gap: 0.01rem;
     }
     h1 span {
         color: cyan;
@@ -83,7 +65,6 @@ const Styles = styled.div`
     }
     p {
         font-size: 1.1rem;
-        display: block;
         margin-block-start: 1em;
         margin-block-end: 1em;
         margin-inline-start: 0px;
