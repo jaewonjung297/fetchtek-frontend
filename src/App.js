@@ -20,7 +20,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import logo from '../src/images/FetchTek-Logo.png';
 import styled from 'styled-components';
-import "@fontsource/merriweather-sans";
 import user from './images/user.png';
 import OrderPage from './pages/OrderPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
